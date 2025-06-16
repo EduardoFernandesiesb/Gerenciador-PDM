@@ -1,4 +1,4 @@
-🚀 Gerenciador de Assinaturas
+#🚀 Gerenciador de Assinaturas
 
 Um aplicativo móvel desenvolvido com React Native e Expo para ajudar usuários a gerenciar e acompanhar suas assinaturas mensais, como serviços de streaming, softwares e outras despesas recorrentes.
 
