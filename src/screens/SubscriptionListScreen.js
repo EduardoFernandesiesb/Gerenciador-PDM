@@ -1,4 +1,4 @@
-// src/screens/SubscriptionListScreen.js
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, Button } from 'react-native';
 import { db } from '../../firebaseConfig';
@@ -24,8 +24,7 @@ const SubscriptionListScreen = ({ navigation }) => {
       setSubscriptions(subs);
     });
 
-    // Função de limpeza: é executada quando o componente é "desmontado" (sai da tela)
-    // Isso evita vazamentos de memória e listeners rodando sem necessidade
+   
     return () => unsubscribe();
   }, []); // O array vazio [] significa que este efeito roda apenas uma vez (ao montar)
 
@@ -82,7 +81,7 @@ const SubscriptionListScreen = ({ navigation }) => {
         data={subscriptions}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        // Mostra uma mensagem se a lista estiver vazia
+        
         ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma assinatura cadastrada.</Text>}
       />
     </View>

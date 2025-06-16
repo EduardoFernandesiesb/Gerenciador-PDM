@@ -1,10 +1,9 @@
-// src/screens/AddSubscriptionScreen.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { db } from '../../firebaseConfig'; // Importando nosso 'db'
+import { db } from '../../firebaseConfig'; 
 import { collection, addDoc, doc, updateDoc, Timestamp } from 'firebase/firestore';
 
-// O 'route' é usado para receber parâmetros passados pela navegação
+
 const AddSubscriptionScreen = ({ navigation, route }) => {
   // Estados para cada campo do formulário
   const [nome, setNome] = useState('');
@@ -12,12 +11,11 @@ const AddSubscriptionScreen = ({ navigation, route }) => {
   const [dataRenovacao, setDataRenovacao] = useState('');
   const [categoria, setCategoria] = useState('');
 
-  // Verifica se estamos editando uma assinatura existente
+
   const isEditing = route.params?.subscription;
   const subscriptionId = route.params?.subscription?.id;
 
-  // useEffect é executado quando o componente carrega
-  // Se estivermos no modo de edição, ele preenche os campos com os dados da assinatura
+  
   useEffect(() => {
     if (isEditing) {
       const { nome, valor, dataRenovacao, categoria } = route.params.subscription;
@@ -34,27 +32,26 @@ const AddSubscriptionScreen = ({ navigation, route }) => {
   const handleSaveSubscription = async () => {
     // Validação simples
     if (!nome || !valor || !dataRenovacao) {
-      Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
+      Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.")
       return;
     }
 
     // Prepara o objeto com os dados para salvar
     const subscriptionData = {
       nome,
-      valor: parseFloat(valor), // Converte o valor de volta para número
-      // Converte a string de data para um Timestamp do Firebase
+      valor: parseFloat(valor),
       dataRenovacao: Timestamp.fromDate(new Date(dataRenovacao)),
       categoria,
     };
 
     try {
       if (isEditing) {
-        // Se estiver editando, ATUALIZA o documento existente
+        
         const subscriptionRef = doc(db, 'assinaturas', subscriptionId);
         await updateDoc(subscriptionRef, subscriptionData);
         Alert.alert("Sucesso", "Assinatura atualizada!");
       } else {
-        // Se for novo, ADICIONA um novo documento na coleção 'assinaturas'
+      
         await addDoc(collection(db, "assinaturas"), subscriptionData);
         Alert.alert("Sucesso", "Assinatura adicionada!");
       }
@@ -68,7 +65,7 @@ const AddSubscriptionScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Nome da Assinatura</Text>
+      <Text style={styles.label}>Nome da Assinatura*</Text>
       <TextInput
         style={styles.input}
         value={nome}
@@ -76,7 +73,7 @@ const AddSubscriptionScreen = ({ navigation, route }) => {
         placeholder="Ex: Netflix"
       />
 
-      <Text style={styles.label}>Valor Mensal (R$)</Text>
+      <Text style={styles.label}>Valor Mensal (R$)*</Text>
       <TextInput
         style={styles.input}
         value={valor}
@@ -85,12 +82,12 @@ const AddSubscriptionScreen = ({ navigation, route }) => {
         keyboardType="numeric"
       />
 
-      <Text style={styles.label}>Data de Próxima Renovação</Text>
+      <Text style={styles.label}>Data de Próxima Renovação*</Text>
       <TextInput
         style={styles.input}
         value={dataRenovacao}
         onChangeText={setDataRenovacao}
-        placeholder="Formato: DD/MM/AAAA"
+        placeholder="Formato: AAAA-MM-DD"
       />
       
       <Text style={styles.label}>Categoria</Text>

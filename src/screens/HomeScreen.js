@@ -1,15 +1,15 @@
-// src/screens/HomeScreen.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { db } from '../../firebaseConfig';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import FloatingActionButton from '../components/FloatingActionButton';
 
 const HomeScreen = ({ navigation }) => {
   const [totalGasto, setTotalGasto] = useState(0);
   const [proximasAssinaturas, setProximasAssinaturas] = useState([]);
   
-  // Usamos useFocusEffect para que os dados sejam recarregados sempre que a tela ganhar foco
+ 
   useFocusEffect(
     React.useCallback(() => {
       const q = query(collection(db, 'assinaturas'), orderBy('dataRenovacao', 'asc'));
@@ -20,11 +20,11 @@ const HomeScreen = ({ navigation }) => {
           assinaturas.push({ id: doc.id, ...doc.data() });
         });
 
-        // 1. Calcula o gasto total
+        // Calcula o gasto total
         const total = assinaturas.reduce((sum, item) => sum + item.valor, 0);
         setTotalGasto(total);
 
-        // 2. Pega as próximas 3 assinaturas
+    
         // O slice pega os 3 primeiros itens do array já ordenado
         setProximasAssinaturas(assinaturas.slice(0, 3));
       });
@@ -67,14 +67,8 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => navigation.navigate('SubscriptionList')}
         />
       </View>
-
-      {/* Botão Flutuante (FAB) para Adicionar */}
-      <TouchableOpacity
-        style={styles.fab}
-        onPress={() => navigation.navigate('AddSubscription')}
-      >
-        <Text style={styles.fabIcon}>+</Text>
-      </TouchableOpacity>
+      
+        <FloatingActionButton onPress={() => navigation.navigate('AddSubscription')} />
     </View>
   );
 };
@@ -108,7 +102,7 @@ const styles = StyleSheet.create({
   },
   proximosContainer: {
     marginHorizontal: 20,
-    flex: 1, // Permite que a lista ocupe o espaço disponível
+    flex: 1, 
   },
   proximosTitle: {
     fontSize: 20,
