@@ -34,58 +34,54 @@ Antes de começar, você vai precisar ter instalado em sua máquina:
 - [Node.js (versão LTS)](https://nodejs.org/)
 - [Yarn](https://classic.yarnpkg.com/lang/en/) ou npm (já vem com o Node.js)
 - Expo CLI:
-
 ```bash
-npm install -g expo-cli
+npm install -g expo-cli 
+```
+Opcional (para testar localmente no emulador):
 
-Git (para clonar o repositório)
+- Emulador Android (via Android Studio)
 
-Opcional:
-
-Emulador Android (via Android Studio)
-
-Simulador iOS (via Xcode - macOS)
+- Simulador iOS (via Xcode — apenas no macOS)
 
 ▶️ Como Rodar o Projeto
 1. Clone este repositório
-bash
-Copiar
-Editar
+
 git clone https://github.com/EduardoFernandesiesb/Gerenciador-PDM.git
+```bash
 cd gerenciador-assinaturas
+ ```
+
 2. Instale as dependências
-bash
-Copiar
-Editar
-npm install
-# ou
+ ```bash
+npm install 
+ou
 yarn install
+```
 3. Configure seu ambiente Firebase
-Este projeto precisa se conectar a um projeto Firebase para funcionar.
+Este projeto precisa se conectar a um projeto Firebase para funcionar corretamente.
 
 Acesse o Console do Firebase e crie um novo projeto.
 
 Vá em Build > Firestore Database e crie um banco no modo de teste.
 
-Volte à tela inicial do Firebase, clique em Adicionar app e selecione a opção da Web (ícone </>).
+Volte à tela inicial do Firebase, clique em Adicionar app e selecione a opção Web (ícone </>).
 
 Copie o objeto firebaseConfig gerado.
 
-Abra o arquivo firebaseConfig.js no projeto e cole as credenciais no local indicado.
+No projeto, abra o arquivo firebaseConfig.js e cole suas credenciais no local indicado.
 
 4. Execute o aplicativo
-bash
-Copiar
-Editar
+```bash
 npm start
-# ou
+ou
 expo start
-Isso abrirá o Expo Dev Tools no seu navegador.
+```
 
-Formas de Rodar o App:
-No seu celular: Baixe o app Expo Go (Android/iOS) e escaneie o QR Code exibido no terminal ou navegador.
+Isso abrirá o Expo Dev Tools no navegador.
 
-No Emulador Android: Com o Android Studio aberto e um emulador rodando, pressione a no terminal.
+📱 Formas de rodar o app:
+No seu celular: Baixe o app Expo Go (Android/iOS) e escaneie o QR Code exibido.
 
-No Simulador iOS (apenas macOS): Com o Xcode aberto, pressione i no terminal.
+No Emulador Android: Com o Android Studio e um emulador rodando, pressione a no terminal.
 
+No Simulador iOS (apenas no macOS): Com o Xcode aberto, pressione i no terminal.
